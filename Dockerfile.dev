@@ -1,0 +1,21 @@
+# Use a specific version of the Node.js image to ensure compatibility and use Alpine for a minimal footprint
+FROM node:18-alpine as development
+
+# Set the working directory inside the container to /app
+WORKDIR /app
+
+# Copy both package.json and package-lock.json (or yarn.lock)
+COPY package*.json ./
+
+# Install dependencies including 'devDependencies' for development
+RUN npm install
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# Expose port 3000 which the application will listen to
+EXPOSE 3000
+
+# Command to run the application using npm
+CMD ["npm", "run", "dev"]
+

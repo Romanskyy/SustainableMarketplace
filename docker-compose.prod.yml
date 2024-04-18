@@ -1,0 +1,11 @@
+version: '3.8' # Use version 3.8 of Docker Compose, which is stable and widely supported
+
+services:
+  app: # Define the app service for production
+    build: 
+      context: . # Set the build context to the current directory
+      dockerfile: Dockerfile.prod # Use the production Dockerfile
+    ports:
+      - "80:3000" # Map port 80 on the host to port 3000 in the container
+    environment:
+      - NODE_ENV=production # Set environment variable to production to optimize performance

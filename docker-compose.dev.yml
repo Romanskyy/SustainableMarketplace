@@ -1,0 +1,14 @@
+version: '3.8' # Use version 3.8 of Docker Compose
+
+services:
+  app: # Define the app service
+    build: 
+      context: . # Set the context to the current directory for the build
+      dockerfile: Dockerfile.dev # Use the development Dockerfile
+    ports:
+      - "3000:3000" # Map port 3000 of the container to port 3000 on the host
+    volumes:
+      - .:/app # Mount the code into the container for hot reloading
+      - /app/node_modules # Create a volume for node_modules to avoid overriding with the local node_modules
+    environment:
+      - NODE_ENV=development # Set environment variable for development
